@@ -1,0 +1,20 @@
+# Node
+node_modules/
+dist/
+
+# Angular
+.angular/
+coverage/
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
