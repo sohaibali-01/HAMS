@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260324165358_IdentityAdded")]
-    partial class IdentityAdded
+    [Migration("20260331075834_ParentStudentAdded")]
+    partial class ParentStudentAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,6 +94,223 @@ namespace API.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("API.Entities.Class", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("API.Entities.Enrollment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("SectionId");
+
+                    b.HasIndex("SessionId");
+
+                    b.HasIndex("StudentId", "SessionId")
+                        .IsUnique();
+
+                    b.ToTable("Enrollments");
+                });
+
+            modelBuilder.Entity("API.Entities.Parents", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ExtraNote")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FatherCnic")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FatherNameUrdu")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FatherOccupation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FatherQualification")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LandlineNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MotherName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MotherNameUrdu")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MotherOccupation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MotherQualification")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PrimaryContact")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SecondaryContact")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FatherCnic")
+                        .IsUnique();
+
+                    b.ToTable("Parents");
+                });
+
+            modelBuilder.Entity("API.Entities.Section", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("Sections");
+                });
+
+            modelBuilder.Entity("API.Entities.Session", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sessions");
+                });
+
+            modelBuilder.Entity("API.Entities.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("AdmissionDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AdmissionNo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("BForm")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DateOfBirthInWords")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FullNameUrdu")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("HifzEQuran")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MarkOfIdentification")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ParentsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PreviousSchool")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RegistrationNo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentsId");
+
+                    b.ToTable("Students");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -128,9 +345,9 @@ namespace API.Data.Migrations
                         },
                         new
                         {
-                            Id = "moderator-id",
+                            Id = "accountant-id",
                             Name = "Accountant",
-                            NormalizedName = "Accountant"
+                            NormalizedName = "ACCOUNTANT"
                         },
                         new
                         {
@@ -242,6 +459,63 @@ namespace API.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("API.Entities.Enrollment", b =>
+                {
+                    b.HasOne("API.Entities.Class", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Section", "Section")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Session", "Session")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Student", "Student")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Section");
+
+                    b.Navigation("Session");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("API.Entities.Section", b =>
+                {
+                    b.HasOne("API.Entities.Class", "Class")
+                        .WithMany("Sections")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+                });
+
+            modelBuilder.Entity("API.Entities.Student", b =>
+                {
+                    b.HasOne("API.Entities.Parents", "Parents")
+                        .WithMany("Students")
+                        .HasForeignKey("ParentsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Parents");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -291,6 +565,31 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.Class", b =>
+                {
+                    b.Navigation("Sections");
+                });
+
+            modelBuilder.Entity("API.Entities.Parents", b =>
+                {
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("API.Entities.Section", b =>
+                {
+                    b.Navigation("Enrollments");
+                });
+
+            modelBuilder.Entity("API.Entities.Session", b =>
+                {
+                    b.Navigation("Enrollments");
+                });
+
+            modelBuilder.Entity("API.Entities.Student", b =>
+                {
+                    b.Navigation("Enrollments");
                 });
 #pragma warning restore 612, 618
         }
