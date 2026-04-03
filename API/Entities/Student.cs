@@ -16,7 +16,7 @@ public class Student
     public required DateTime DateOfBirth { get; set; }
     public required string DateOfBirthInWords { get; set; }
     public required DateTime AdmissionDate { get; set; }
-    public DateTime EntryDate { get; set; }
+    public DateTime EntryDate { get; set; } = DateTime.UtcNow;
     public string? PreviousSchool { get; set; }
     public string? MarkOfIdentification { get; set; }
     public required bool HifzEQuran { get; set; }

@@ -5,7 +5,7 @@ namespace API.Entities;
 public class Class
 {
     public int Id { get; set; }
-    public string Name { get; set; } // "Grade 10"
+    public string Name { get; set; }= null!; // "Grade 10"
 
-    public ICollection<Section> Sections { get; set; } = new List<Section>();
+    public ICollection<Section> Sections { get; set; } = [];
 }
